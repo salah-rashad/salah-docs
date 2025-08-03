@@ -1,0 +1,148 @@
+---
+import { StringUtils } from "../utils/string-utils";
+import { Badge } from "@astrojs/starlight/components";
+
+const packageName = Astro.props.packageName;
+
+const fetchPackage = async (packageName: string) => {
+  const response = await fetch(`https://pub.dev/api/packages/${packageName}`);
+  if (!response.ok)
+    throw new Error(
+      `[${response.status} ${response.statusText}] Failed to fetch ${packageName}`
+    );
+  return await response.json();
+};
+
+const fetchPackageScore = async (packageName: string) => {
+  const response = await fetch(
+    `https://pub.dev/api/packages/${packageName}/score`
+  );
+  if (!response.ok)
+    throw new Error(
+      `[${response.status} ${response.statusText}] Failed to fetch score for ${packageName}`
+    );
+  return await response.json();
+};
+
+const packageData = await fetchPackage(packageName);
+const packageScore = await fetchPackageScore(packageName);
+---
+
+<article class="pkg-card">
+  <div>
+    <div class="pkg-header">
+      <h2 class="pkg-name">
+        <a
+          href={"https://pub.dev/packages/" + packageData.name}
+          target="_blank"
+        >
+          {packageData.name}
+        </a>
+      </h2>
+      <Badge
+        text={"v" + packageData.latest.version}
+        size="small"
+      />
+    </div>
+    <p class="pkg-description">{packageData.latest.pubspec.description}</p>
+  </div>
+
+  <div class="pkg-stats">
+    <div class="stat">
+      <span class="stat-value"
+        >{StringUtils.formatNumberShort(packageScore.likeCount)}</span
+      >
+      <span class="stat-label">Likes</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value"
+        >{packageScore.grantedPoints}/{packageScore.maxPoints}</span
+      >
+      <span class="stat-label">Pub Points</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value"
+        >{StringUtils.formatNumberShort(packageScore.downloadCount30Days)}{
+
+        }</span
+      >
+      <span class="stat-label">Downloads</span>
+    </div>
+  </div>
+</article>
+
+<style>
+  @layer starlight.components {
+    .pkg-card {
+      background-color: var(--sl-color-surface);
+      border: 1px solid var(--sl-color-gray-6);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s ease-in-out;
+      justify-content: space-between;
+    }
+
+    .pkg-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .pkg-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .pkg-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--sl-color-white);
+      margin: 0;
+    }
+
+    .pkg-name a {
+      color: var(--sl-color-white);
+      text-decoration: none;
+    }
+
+    .pkg-version {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--sl-color-gray-4);
+    }
+
+    .pkg-description {
+      font-size: 0.95rem;
+      color: var(--sl-color-gray-3);
+      line-height: 1.5;
+    }
+
+    .pkg-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      align-items: end;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-value {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--sl-color-white);
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--sl-color-gray-4);
+    }
+  }
+</style>

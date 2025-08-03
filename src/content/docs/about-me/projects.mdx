@@ -1,0 +1,33 @@
+---
+title: My Projects
+pagefind: false
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+import GitHubRepoCard from "../../../components/GitHubRepoCard.astro";
+import PubDevPackageCard from "../../../components/PubDevPackageCard.astro";
+
+### 📱 Applications
+
+<CardGrid>
+  <GitHubRepoCard name="salah-rashad" repository="rick_and_morty" />
+  <GitHubRepoCard name="salah-rashad" repository="takwine_remaster" />
+  <GitHubRepoCard name="salah-rashad" repository="takwine_backend" />
+  <GitHubRepoCard name="salah-rashad" repository="ladycare" />
+</CardGrid>
+
+### 📦 Packages
+
+<CardGrid>
+  <PubDevPackageCard packageName="flutter_context_menu" />
+  <PubDevPackageCard packageName="blueprint_system" />
+  <PubDevPackageCard packageName="assist" />
+</CardGrid>
+
+### 🎮 Games
+
+<CardGrid>
+  <GitHubRepoCard name="salah-rashad" repository="bankroll" />
+  <GitHubRepoCard name="salah-rashad" repository="heist_squad_x" />
+  <GitHubRepoCard name="salah-rashad" repository="tic_tac_toe" />
+</CardGrid>

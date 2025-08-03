@@ -2,41 +2,64 @@
 title: Hi, I'm Salah
 description: My brain dump of knowledge.
 template: splash
+pagefind: false
 hero:
-  tagline: "Just a guy who writes code, breaks stuff, fixes it (usually), and calls it a day 😎<br /><br />When I'm not coding, I'm probably reverse-engineering dead games, building weird game systems, or pretending to take a “short break” that somehow turns into a Steam session 🎮<br /><br />Let's be honest, I build cool things and occasionally sleep."
+  tagline: "Just a guy who writes code, breaks stuff, fixes it (usually), and calls it a day 😎<br /><br />When I’m Not “Coding”...<br/>...I’m still coding — just in weirder ways.<br/><br/>I'm probably reverse-engineering dead games, building weird game systems, or pretending to take a “short break” that somehow turns into a Steam session 🎮<br /><br />Let's be honest, I build cool things and occasionally sleep."
   image:
     file: ../../assets/survivor-masked.png
   actions:
-    - text: Learn More
-      link: /about-me/
+    - text: More About Me
+      link: /about-me/about-me
       icon: right-arrow
     - text: GitHub
       link: https://github.com/salah-rashad
-      icon: external
+      icon: github
       variant: minimal
+      attrs:
+        target: "_blank"
     - text: LinkedIn
       link: https://www.linkedin.com/in/salah-rashad/
-      icon: external
+      icon: linkedin
       variant: minimal
+      attrs:
+        target: "_blank"
+    - text: Gmail
+      link: mailto:9Eo9L@example.com
+      icon: email
+      variant: minimal
+      attrs:
+        target: "_blank"
 ---
 
+import Analytics from "@vercel/analytics/astro";
+
+<Analytics />
+
 import { Card, CardGrid } from "@astrojs/starlight/components";
+import GitHubRepoCard from "../../components/GitHubRepoCard.astro";
+import PubDevPackageCard from "../../components/PubDevPackageCard.astro";
 
-## Next steps 
+### 📦 Packages
 
-Now that you have your docs site set up, here are some things you can do next:
+<CardGrid>
+  <PubDevPackageCard packageName="flutter_context_menu" />
+  <PubDevPackageCard packageName="blueprint_system" />
+  <PubDevPackageCard packageName="assist" />
+</CardGrid>
 
-<CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
-  </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
-  </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
-  </Card>
+### 📱 Applications
+
+<CardGrid>
+  <GitHubRepoCard name="salah-rashad" repository="rick_and_morty" />
+  <GitHubRepoCard name="salah-rashad" repository="takwine_remaster" />
+  <GitHubRepoCard name="salah-rashad" repository="takwine_backend" />
+  <GitHubRepoCard name="salah-rashad" repository="ladycare" />
+</CardGrid>
+
+### 🎮 Games
+
+<CardGrid>
+  <GitHubRepoCard name="salah-rashad" repository="bankroll" />
+  <GitHubRepoCard name="salah-rashad" repository="heist_squad_x" />
+  <GitHubRepoCard name="salah-rashad" repository="tic_tac_toe" />
 </CardGrid>

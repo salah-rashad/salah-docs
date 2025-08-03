@@ -2,6 +2,8 @@ import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
 import starlight from "@astrojs/starlight";
 import starlightThemeObsidian from "starlight-theme-obsidian";
+import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
 
 export default defineConfig({
   output: "server",
@@ -14,7 +16,17 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "salah.dev",
+      favicon: "/favicon/favicon.ico",
       plugins: [starlightThemeObsidian()],
+      // editLink: {
+      //   baseUrl: "https://github.com/salah-rashad/salah-docs/blob/main/",
+      // },
+      logo: {
+        src: "/public/favicon/apple-touch-icon.png",
+        alt: "salah.dev",
+        // replacesTitle: true,
+      },
+      customCss: ["/src/styles/custom.css"],
       social: [
         {
           icon: "github",
@@ -26,20 +38,30 @@ export default defineConfig({
           label: "LinkedIn",
           href: "https://www.linkedin.com/in/salah-rashad/",
         },
+        {
+          icon: "email",
+          label: "Gmail",
+          href: "mailto:salah.r.ahmed@gmail.com",
+        },
       ],
-      // sidebar: [
-      //   {
-      //     label: "Guides",
-      //     items: [
-      //       // Each item here is one entry in the navigation menu.
-      //       { label: "Example Guide", slug: "guides/example" },
-      //     ],
-      //   },
-      //   {
-      //     label: "Reference",
-      //     autogenerate: { directory: "reference" },
-      //   },
-      // ],
+      sidebar: [
+        {
+          label: "About Me",
+          items: [
+            { label: "About Me", slug: "about-me/about-me" },
+          ],
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "Guides" },
+        },
+        {
+          label: "Reference",
+          autogenerate: { directory: "Reference" },
+        },
+      ],
     }),
+    react(),
+    mdx(),
   ],
 });
