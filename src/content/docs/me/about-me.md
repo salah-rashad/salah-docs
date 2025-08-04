@@ -1,6 +1,7 @@
 ---
 title: About Me
 pagefind: false
+slug: about-me
 ---
 
 Hey, I’m **Salah** — a passionate Flutter developer from Egypt 🇪🇬 who’s been immersed in code, UI, and problem-solving since 2017.

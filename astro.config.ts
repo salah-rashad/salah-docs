@@ -16,8 +16,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "salah.dev",
+      description:
+        "salah.dev is a personal website and blog that showcases my journey as a software engineer, sharing insights, tutorials, and experiences in the tech industry.",
       favicon: "/favicon/favicon.ico",
       plugins: [starlightThemeObsidian()],
+      titleDelimiter: "—",
       // editLink: {
       //   baseUrl: "https://github.com/salah-rashad/salah-docs/blob/main/",
       // },
@@ -26,7 +29,7 @@ export default defineConfig({
         alt: "salah.dev",
         // replacesTitle: true,
       },
-      customCss: ["/src/styles/custom.css"],
+      customCss: ["/src/styles/global.css"],
       social: [
         {
           icon: "github",
@@ -46,18 +49,14 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: "About Me",
-          items: [
-            { label: "About Me", slug: "about-me/about-me" },
-          ],
+          label: "🐦 Flutter/Dart",
+          autogenerate: { directory: "Flutter" },
+          collapsed: true,
         },
         {
-          label: "Reference",
-          autogenerate: { directory: "Guides" },
-        },
-        {
-          label: "Reference",
-          autogenerate: { directory: "Reference" },
+          label: "🎮 Unity",
+          autogenerate: { directory: "Unity" },
+          collapsed: true,
         },
       ],
     }),
